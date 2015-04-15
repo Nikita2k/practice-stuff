@@ -5,29 +5,28 @@
 // The goal is to check whether array A can be sorted into non-decreasing order by performing at most one swap operation.
 
 function solution(A) {
-	var outOfOrder = [];
-	var greatest = 0;
+	var swapCount = 0;
+	var swap = function(items, firstIndex, secondIndex){
+		var temp = items[firstIndex];
+		items[firstIndex] = items[secondIndex];
+		items[secondIndex] = temp;
+	};
+
 	for(var i = 0; i < A.length; i++){
-		if (A[i] > greatest){
-			greatest = A[i];
-		}
-
-		if(A[i] > A[i + 1]){
-			outOfOrder.push({value: A[i], index: i });
-			A.splice(i,1);
-			i--;
+		while(swapCount <= 2){
+			for(var j = 0; j < i; j++){
+				if(A[i] > A[j]){
+					swap(A, i, j);
+					swapCount++;
+				}
+			}
 		}
 	}
 
-	if(outOfOrder.length > 2){
-		// too many elements out of order
+	if(swapCount > 2)
 		return false;
-	} else if(outOfOrder.length == 1 && greatest == outOfOrder[0].value){
-		// one element out of order and it is the largest
-		return false;
-	}
-
-	return true;
+	else
+		return true;
 }
 
 console.log(solution([1,3,5,3,7]));	// true
