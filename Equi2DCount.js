@@ -4,12 +4,16 @@
 // sum of elements in columns to left is
 // equal to sum of elements in columns to right
 
-var exampleMatrix = [
+var exampleMatrix1 = [
 	[2,7,5],
 	[3,1,1],
 	[2,1,-7],
 	[0,2,1],
 	[1,6,8]
+];
+
+var oneRow = [
+	[2,7,2]
 ];
 
 // returns sum of rows and columns
@@ -71,17 +75,13 @@ function solution(N){
 		}
 	}
 
-	// return the greatest value
-	if(columnsWithBalance.length > rowsWithBalance.length){
-		return columnsWithBalance.length;
-	} else if(columnsWithBalance.length < rowsWithBalance.length){
-		return rowsWithBalance.length;
+	if(columnsWithBalance.length >= 1 && rowsWithBalance.length >= 1){
+		return (columnsWithBalance.length > rowsWithBalance.length) ? columnsWithBalance.length : rowsWithBalance.length;
 	} else {
-		// no equilibrium points
-		return 0;
+		return -1;
 	}
 }
 
 
-var a = solution(exampleMatrix); // (1,1) and (3,1)
+var a = solution(oneRow);
 console.log(a);
